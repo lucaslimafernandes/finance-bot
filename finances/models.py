@@ -1,5 +1,7 @@
 from django.db import models
-from apps.accounts.models import User
+from django.utils import timezone
+
+from accounts.models import User
 
 class Transaction(models.Model):
 
@@ -42,7 +44,11 @@ class Transaction(models.Model):
         max_length=100
     )
 
-    date = models.DateField()
+    installments = models.IntegerField(
+        default=1
+    )
+
+    date = models.DateField(default=timezone.now)
 
     created_at = models.DateTimeField(
         auto_now_add=True
